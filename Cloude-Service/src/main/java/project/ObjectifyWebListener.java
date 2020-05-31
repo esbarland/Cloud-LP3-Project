@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebListener;
 import com.googlecode.objectify.ObjectifyService;
 
 import model.Account;
+import model.Approval;
 
 @WebListener
 public class ObjectifyWebListener implements ServletContextListener {
@@ -15,6 +16,7 @@ public class ObjectifyWebListener implements ServletContextListener {
   public void contextInitialized(ServletContextEvent event) {
     ObjectifyService.init();
     ObjectifyService.register(Account.class);
+    ObjectifyService.register(Approval.class);
   }
 
   @Override
