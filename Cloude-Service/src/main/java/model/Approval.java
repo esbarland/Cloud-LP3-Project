@@ -10,6 +10,8 @@ public class Approval {
 	private String nom;
 	private String reponse;
 	
+	public Approval() {}
+	
 	public Approval(String nom, String reponse) {
 		this.nom = nom;
 		this.reponse = reponse;

@@ -21,10 +21,6 @@ public class AccountService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAccounts() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<h3>Liste des comptes</h3>");
-		sb.append("<ul>");
-
 		List<Account> listAccounts = ObjectifyService.ofy().load().type(Account.class).list();
 
 		Gson gson = new Gson();

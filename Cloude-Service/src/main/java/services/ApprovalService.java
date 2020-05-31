@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.googlecode.objectify.ObjectifyService;
 
-import model.Account;
 import model.Approval;
 
 @Path("/approval")
@@ -21,12 +20,7 @@ public class ApprovalService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getApprovals() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<h3>Liste des approvals</h3>");
-		sb.append("<ul>");
-		
-		
+	public String getApprovals() {		
 		List<Approval> approvals = ObjectifyService.ofy().load().type(Approval.class).list();
 		
 		Gson gson = new Gson();
