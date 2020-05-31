@@ -1,0 +1,12 @@
+{
+    "name": "esteb/client",
+    "authors": [
+        {
+            "name": "Estéban",
+            "email": "esteban.barland@yahoo.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
