@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.googlecode.objectify.ObjectifyService;
 
+import model.Account;
 import model.Approval;
 
 @Path("/approval")
@@ -49,6 +50,9 @@ public class ApprovalService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeAccount(@PathParam("id") Long id) {
+		Approval a =  ObjectifyService.ofy().load().type(Approval.class).id(id).now();
+		if(a == null)
+			return Response.status(400).build();
 		ObjectifyService.ofy().delete().type(Approval.class).id(id).now();
 		
 		Gson gson = new Gson();

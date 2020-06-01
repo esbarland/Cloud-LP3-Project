@@ -49,6 +49,9 @@ public class AccountService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeAccount(@PathParam("id") Long id) {
+		Account a =  ObjectifyService.ofy().load().type(Account.class).id(id).now();
+		if(a == null)
+			return Response.status(400).build();
 		ObjectifyService.ofy().delete().type(Account.class).id(id).now();
 		Gson gson = new Gson();
 		String json = gson.toJson("deleted");
@@ -60,6 +63,8 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateAmount(@PathParam("id") Long id, @PathParam("amount")int amount) {
 		Account a = ObjectifyService.ofy().load().type(Account.class).id(id).now();
+		if(a == null)
+			return Response.status(400).build();
 		a.setAmount(a.getAmount() + amount);
 		ObjectifyService.ofy().save().entity(a).now();
 		Gson gson = new Gson();
