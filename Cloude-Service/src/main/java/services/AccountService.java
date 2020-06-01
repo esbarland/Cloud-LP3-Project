@@ -10,9 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Result;
 
 import model.Account;
 
@@ -21,44 +23,48 @@ public class AccountService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAccounts() {
+	public Response getAccounts() {
 		List<Account> listAccounts = ObjectifyService.ofy().load().type(Account.class).list();
 
 		Gson gson = new Gson();
 		String json = gson.toJson(listAccounts);
-		return json;
+		return Response.status(200).entity(json).build();
 	}
 
 	@POST
 	@Path("{lastname}/{firstname}/{amount}/{risk}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addAccount(@PathParam("lastname") String lastname, @PathParam("firstname") String firstname, @PathParam("amount") int amount, @PathParam("risk") String risk) {
+	public Response addAccount(@PathParam("lastname") String lastname, @PathParam("firstname") String firstname, @PathParam("amount") int amount, @PathParam("risk") String risk) {
+		if(!risk.equalsIgnoreCase("low") && !risk.equalsIgnoreCase("high"))
+			return Response.status(400).build();
 		Account a = new Account(firstname, lastname, amount, risk);
 		ObjectifyService.ofy().save().entity(a).now();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(a);
-		return json;
+		return Response.status(201).entity(json).build();
 	}
 	
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String removeAccount(@PathParam("id") Long id) {
+	public Response removeAccount(@PathParam("id") Long id) {
 		ObjectifyService.ofy().delete().type(Account.class).id(id).now();
-		
-		return "deleted";
+		Gson gson = new Gson();
+		String json = gson.toJson("deleted");
+		return Response.status(200).entity(json).build();
 	}
 	
 	@PUT
 	@Path("{id}/{amount}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateAmount(@PathParam("id") Long id, @PathParam("amount")int amount) {
+	public Response updateAmount(@PathParam("id") Long id, @PathParam("amount")int amount) {
 		Account a = ObjectifyService.ofy().load().type(Account.class).id(id).now();
 		a.setAmount(a.getAmount() + amount);
+		ObjectifyService.ofy().save().entity(a).now();
 		Gson gson = new Gson();
 		String json = gson.toJson(a);
-		return json;
+		return Response.status(200).entity(json).build();
 		
 	}
 

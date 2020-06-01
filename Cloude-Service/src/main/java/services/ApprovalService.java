@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import com.googlecode.objectify.ObjectifyService;
@@ -20,33 +22,38 @@ public class ApprovalService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getApprovals() {		
+	public Response getApprovals() {		
 		List<Approval> approvals = ObjectifyService.ofy().load().type(Approval.class).list();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(approvals);
-		return json;
+		
+		return Response.status(200).entity(json).build();
 	}
 	
 	
 	@POST
 	@Path("{nom}/{reponse}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addApproval(@PathParam("nom") String nom, @PathParam("reponse") String reponse) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addApproval(@PathParam("nom") String nom, @PathParam("reponse") String reponse) {
 		Approval approval = new Approval(nom, reponse);
 		ObjectifyService.ofy().save().entity(approval).now();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(approval);
-		return json;
+		return Response.status(200).entity(json).build();
 	}
 	
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String removeAccount(@PathParam("id") Long id) {
+	public Response removeAccount(@PathParam("id") Long id) {
 		ObjectifyService.ofy().delete().type(Approval.class).id(id).now();
 		
-		return "deleted";
+		Gson gson = new Gson();
+		String json = gson.toJson("deleted");
+		
+		return Response.status(200).entity(json).build();
 	}
 }
