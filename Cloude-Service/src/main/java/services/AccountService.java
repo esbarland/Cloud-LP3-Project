@@ -32,7 +32,7 @@ public class AccountService {
 	@Path("{lastname}/{firstname}/{amount}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addAccount(@PathParam("lastname") String lastname, @PathParam("firstname") String firstname, @PathParam("amount") int amount) {
-		Account a = new Account(firstname, lastname, amount, false);
+		Account a = new Account(firstname, lastname, amount, "low");
 		ObjectifyService.ofy().save().entity(a).now();
 		
 		Gson gson = new Gson();

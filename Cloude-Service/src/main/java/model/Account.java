@@ -10,11 +10,11 @@ public class Account {
 	private String nom;
 	private String prenom;
 	private int amount;
-	private boolean risk;
+	private String risk;
 	
 	public Account() {}
 	
-	public Account(String nom, String prenom, int amount, boolean risk) {
+	public Account(String nom, String prenom, int amount, String risk) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.amount = amount;
@@ -53,11 +53,11 @@ public class Account {
 		return amount;
 	}
 	
-	public void setRisk(boolean risk) {
+	public void setRisk(String risk) {
 		this.risk = risk;
 	}
 	
-	public boolean getRisk() {
+	public String getRisk() {
 		return risk;
 	}
 	

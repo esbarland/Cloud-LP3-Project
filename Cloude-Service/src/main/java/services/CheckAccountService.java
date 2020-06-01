@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Result;
 
 import model.Account;
 
@@ -16,15 +15,14 @@ import model.Account;
 public class CheckAccountService {
 
 	@GET
-	@Path("/{id}")
-	@Produces(MediaType.TEXT_HTML)
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public String checkAccount(@PathParam("id") Long id) {
-		Result<Account> result = ObjectifyService.ofy().load().type(Account.class).id(id);
-		
-		Account acc = result.now();
+		Account result = ObjectifyService.ofy().load().type(Account.class).id(id).now();
+		String risk = result.getRisk();
 		
 		Gson gson = new Gson();
-		String json = gson.toJson(acc.getRisk());
+		String json = gson.toJson(risk);
 		return json;
 	}
 	
