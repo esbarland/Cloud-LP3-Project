@@ -1,0 +1,33 @@
+Projet de Cloud Computing par:
+- BAILLY Thibaut
+- BARLAND Estéban
+
+################################################################################
+
+Nous avons 4 services:
+- AccountService (GAE, permet d'ajouter, de supprimer et de lister les Account) (Thibaut / Estéban)
+- ApprovalService (GAE, permet d'ajouter, de supprimer et de lister les Approval) (Thibaut)
+- CheckAccountService (GAE, renvoie le "risk" du compte) (Thibaut)
+- LoanApprovalService (Heroku, crédite un compte en fonction de son id et du montant) (Estéban)
+
+Toutes les données sont stockées dans le Datastore de Google App Engine
+
+################################################################################
+
+et notre modèle contient 2 classes:
+- Account
+- Approval
+
+La classe Account contient 5 attributs :
+- id
+- nom (le nom de celui qui possède le compte)
+- prenom (le prénom de celui qui possède le compte)
+- amount (le montant du compte)
+- risk (le risque du compte, "low" ou "high")
+
+La classe Approval contient 3 attributs :
+- id
+- idAccount (l'id du compte sur laquelle nous avons fait une opération)
+- reponse (le type de réponse, "accepted" ou "refused")
+
+################################################################################
