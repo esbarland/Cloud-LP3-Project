@@ -33,11 +33,11 @@ public class ApprovalService {
 	
 	
 	@POST
-	@Path("{nom}/{reponse}")
+	@Path("{idAccount}/{reponse}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addApproval(@PathParam("nom") String nom, @PathParam("reponse") String reponse) {
-		Approval approval = new Approval(nom, reponse);
+	public Response addApproval(@PathParam("idAccount") Long idAccount, @PathParam("reponse") String reponse) {
+		Approval approval = new Approval(idAccount, reponse);
 		ObjectifyService.ofy().save().entity(approval).now();
 		
 		Gson gson = new Gson();

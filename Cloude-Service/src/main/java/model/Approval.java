@@ -7,13 +7,13 @@ import com.googlecode.objectify.annotation.Id;
 public class Approval {
 	@Id
 	private Long id;
-	private String nom;
+	private Long idAccount;
 	private String reponse;
 	
 	public Approval() {}
 	
-	public Approval(String nom, String reponse) {
-		this.nom = nom;
+	public Approval(Long idAccount, String reponse) {
+		this.idAccount = idAccount;
 		this.reponse = reponse;
 	}
 	
@@ -21,12 +21,12 @@ public class Approval {
 		this.id = id;
 	}
 	
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNom(Long idAccount) {
+		this.idAccount = idAccount;
 	}
 	
-	public String getNom() {
-		return nom;
+	public Long getidAccount() {
+		return idAccount;
 	}
 	
 	public void setReponse(String reponse) {
