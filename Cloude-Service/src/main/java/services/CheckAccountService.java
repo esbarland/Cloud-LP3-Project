@@ -20,6 +20,8 @@ public class CheckAccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response checkAccount(@PathParam("id") Long id) {
 		Account result = ObjectifyService.ofy().load().type(Account.class).id(id).now();
+		if(result == null)
+			return Response.status(400).build();
 		String risk = result.getRisk();
 		
 		Gson gson = new Gson();
