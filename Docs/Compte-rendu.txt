@@ -5,10 +5,10 @@ Projet de Cloud Computing par:
 ################################################################################
 
 Nous avons 4 services:
-- AccountService (GAE, permet d'ajouter, de supprimer et de lister les Account) (Thibaut / Estéban)
-- ApprovalService (GAE, permet d'ajouter, de supprimer et de lister les Approval) (Thibaut)
-- CheckAccountService (GAE, renvoie le "risk" du compte) (Thibaut)
-- LoanApprovalService (Heroku, crédite un compte en fonction de son id et du montant) (Estéban)
+- AccountService (GAE Cloude-Service, permet d'ajouter, de supprimer et de lister les Account) (Thibaut / Estéban)
+- ApprovalService (GAE Cloude-Service, permet d'ajouter, de supprimer et de lister les Approval) (Thibaut)
+- CheckAccountService (GAE Cloude-Service, renvoie le "risk" du compte) (Thibaut)
+- LoanApprovalService (Heroku cloud-project, crédite un compte en fonction de son id et du montant) (Estéban)
 
 Toutes les données sont stockées dans le Datastore de Google App Engine
 
@@ -29,5 +29,3 @@ La classe Approval contient 3 attributs :
 - id
 - idAccount (l'id du compte sur laquelle nous avons fait une opération)
 - reponse (le type de réponse, "accepted" ou "refused")
-
-################################################################################
