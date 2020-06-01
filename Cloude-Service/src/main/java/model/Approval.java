@@ -21,11 +21,11 @@ public class Approval {
 		this.id = id;
 	}
 	
-	public void setidAccount(Long idAccount) {
+	public void setIdAccount(Long idAccount) {
 		this.idAccount = idAccount;
 	}
 	
-	public Long getidAccount() {
+	public Long getIdAccount() {
 		return idAccount;
 	}
 	
