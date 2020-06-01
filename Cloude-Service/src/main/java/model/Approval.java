@@ -21,7 +21,7 @@ public class Approval {
 		this.id = id;
 	}
 	
-	public void setNom(Long idAccount) {
+	public void setidAccount(Long idAccount) {
 		this.idAccount = idAccount;
 	}
 	
